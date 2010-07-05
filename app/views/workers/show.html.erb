@@ -1,0 +1,11 @@
+<p>
+  <b>Name:</b>
+  <%=h @worker.name %>
+  <br>
+  <b>Has Chores:</b>
+  <%=h @worker.has_chores %>
+</p>
+
+
+<%= link_to 'Edit', edit_worker_path(@worker) %> |
+<%= link_to 'Back', workers_path %>

@@ -1,0 +1,41 @@
+<% form_for(@task) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :last_date %><br />
+    <%= f.date_select :last_date %>
+  </p>
+  <p>
+    <%= f.label :next_date %><br />
+    <%= f.date_select :next_date %>
+  </p>
+  <p>
+    <%= f.label :duration %><br />
+    <%= f.text_field :duration, :style=>'width: 50px' %>
+  </p>
+  <p>
+    <%= f.label :Recurrance %> "(days, 1=every day, 7=every week)"<br/>
+    <%= f.text_field :recurrance, :style=>'width: 50px' %>
+  </p>
+  <p>
+    <%= f.label :priority %><br />
+    <%= f.text_field :priority, :style=>'width: 50px' %>
+  </p>
+  <p>
+    <br>
+    <b>Include in plan:</b><br>
+    <% for worker in Worker.find(:all) %>
+    <div> 
+       <%= check_box_tag "task[worker_ids][]", worker.id, @task.workers.include?(worker) %>
+       <%= worker.name %>
+    </div>
+    <% end %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

@@ -1,0 +1,34 @@
+<h1>Chores</h1>
+
+<table cellspacing="5" >
+  <tr align="left">
+    <th>Description</th>
+    <th>Last date</th>
+    <th>Next date</th>
+    <th>Minutes</th>
+    <th>Recurrance</th>
+    <th>Priority</th>
+  </tr>
+
+<% for task in @tasks %>
+  <tr>
+    <td><%= link_to task.description, task %></td>
+    <td><%=h task.last_date %></td>
+    <td><%=h task.next_date %></td>
+    <td align="center"><%=h task.duration %></td>
+    <td align="center"><%=h task.recurrance %></td>
+    <td align="center"><%=h task.priority %></td>
+<!--    <td><%= link_to 'Show', task %></td> -->
+    <td><%= link_to 'Edit', edit_task_path(task) %></td> 
+<% for w in task.workers %>
+<td><%=h w.name %></td>
+<% end %>
+<!--    <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>  -->
+  </tr>
+<% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New task', new_task_path %> |
+<%= link_to 'Plans', plans_path %>

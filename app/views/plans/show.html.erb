@@ -1,0 +1,29 @@
+<p>
+  <b>Date:</b>
+  <%=h @plan.date %>
+  <br>
+  <b>Recorded: </b>
+  <%=h @plan.recorded %>
+  <br>
+  <b>Duration: </b>
+  <%= @plan.duration %>
+  <br>
+  <table cellspacing="3">
+    <tr>
+      <th align="left">Chore Lists</th>
+      <th align="right" width="100">Min.</th>
+    </tr>
+
+    <% for cl in @plan.chore_lists %>
+    <tr>
+        <td><%= link_to cl.worker.name, chore_list_path(cl) %></td>
+        <td align="right"><%=h cl.duration %></td>
+    </tr>
+    <% end %>
+  </table>
+</p>
+<br>
+
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>

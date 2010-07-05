@@ -1,0 +1,30 @@
+<p>
+  <b>Plan:</b>
+  <%=h @chore_list.plan.date %>
+</p>
+
+<p>
+  <b>Worker:</b>
+  <%=h @chore_list.worker.name %>
+  <table>
+    <tr> 
+      <th align="left">Task</th> 
+      <th align="left">Minutes</th>
+    </tr>
+    <% for a in @chore_list.assignments %>
+      <tr> 
+        <td><%=h a.task.description %></td>
+        <td><%=h a.task.duration %></td> 
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<p>
+  <b>Total Time:</b>
+  <%=h @chore_list.duration %>
+</p>
+
+
+<%= link_to 'Edit', edit_chore_list_path(@chore_list) %> |
+<%= link_to 'Plans', plans_path %>

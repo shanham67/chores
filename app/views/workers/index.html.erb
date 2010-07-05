@@ -1,0 +1,20 @@
+<h1>Chore Workers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% for worker in @workers %>
+  <tr>
+    <td><%=h worker.name %></td>
+    <td><%= link_to 'Edit', edit_worker_path(worker) %></td>
+    <td><%= link_to 'Unrecorded', unrecorded_plans_for_worker_path(worker)%></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New worker', new_worker_path %>
+<%= link_to 'Plans', plans_path %>

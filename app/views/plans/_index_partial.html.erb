@@ -1,0 +1,37 @@
+<table>
+  <tr>
+    <b>
+    <th></th>
+    <th align="left"><u>Date</u></th>
+    <th><u>Duration</u></th>
+    </u>
+    </b>
+  </tr>
+
+<% for plan in @plans %>
+  <tr>
+    <td><b>Chores for:  </b></td>
+    <td><%=h plan.human_date %></td>
+    <td align="center"><%=h plan.duration %></td>
+    <td><%= link_to 'Show', plan %></td>
+    <td><%= link_to 'Print', :id=> plan.id, :action => "printout" %></td>
+    <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
+    <td><%= link_to 'Delete', plan, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if !plan.recorded %>
+       <td><%= link_to 'Record', :id=> plan.id, :action => "do_record" %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New plan', new_plan_path %> | 
+<%= link_to 'Workers', workers_path %> | 
+<%= link_to 'Tasks', tasks_path %> | 
+<%= link_to 'Create Plans for Week', input_time_for_week_plans_path %> | 
+<%= link_to 'Printout By Date', formatted_unrecorded_ordered_by_day_plans_path( :pdf ) %> | 
+<%= link_to 'Printout By Worker', formatted_unrecorded_ordered_by_worker_plans_path( :pdf ) %> | 
+<% if !Plan.unrecorded.empty? %>
+  <%= link_to 'Record All', :action => "record_all" %> | 
+<% end %>

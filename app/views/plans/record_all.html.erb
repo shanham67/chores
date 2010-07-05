@@ -1,0 +1,26 @@
+<h1>Chore Planner</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+  </tr>
+
+<% for plan in @plans %>
+  <tr>
+    <td><b>Chores for:  </b><%=h plan.date %></td>
+    <td><%= link_to 'Show', plan %></td>
+    <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
+    <td><%= link_to 'Destroy', plan, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if !plan.recorded %>
+    <td><%= link_to 'Record', do_record_plan_path(plan) %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New plan', new_plan_path %> | 
+<%= link_to 'Workers', workers_path %> | 
+<%= link_to 'Tasks', tasks_path %> |
+<%= link_to 'Record All', plans_path %>

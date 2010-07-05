@@ -1,0 +1,39 @@
+<h1>Edit Chore List</h1>
+
+<% form_for(@chore_list) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <b><%= f.label :plan %>:</b> <%= f.label @chore_list.plan.date %><br>
+  </p>
+  <p>
+    <b><%= f.label :worker %>:</b> <%= f.label @chore_list.worker.name %><br>
+  </p>
+  <p>
+    <b><%= f.label :duration %>:</b>
+    <%= f.text_field :duration, :style=>'width: 50px' %>
+  </p>
+  <p>
+    <table>
+    <tr>
+      <th>Complete</th>
+      <th>Duration</th>
+      <th align="left">Chore</th>
+    </tr>
+    <% for assignment in @chore_list.assignments %>
+      <% fields_for "chore_list[assignment_attributes][]", assignment do |assignment_form| %>
+            <tr>
+            <td><%= assignment_form.check_box :complete %></td>
+            <td align="center"><%= assignment_form.label assignment.task.duration %></td>
+            <td><%= assignment_form.label assignment.task.description %></td>
+            </tr>
+      <% end %>
+    <% end %>
+    </table>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @chore_list %> |
+<%= link_to 'Plans', plans_path %>

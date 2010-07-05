@@ -1,0 +1,51 @@
+<p>
+  <b>Description:</b>
+  <%=h @task.description %>
+</p>
+
+<p>
+  <b>Last date:</b>
+  <%=h @task.last_date %>
+</p>
+
+<p>
+  <b>Next date:</b>
+  <%=h @task.next_date %>
+</p>
+
+<p>
+  <b>Duration(min.):</b>
+  <%=h @task.duration %>
+</p>
+
+<p>
+  <b>Recurrance(days):</b>
+  <%=h @task.recurrance %>
+</p>
+
+<p>
+  <b>Priority(10hi-1lo):</b>
+  <%=h @task.priority %>
+</p>
+
+<p>
+  <table>
+    <tr>
+      <th><%= pluralize( @task.workers.count, "Worker" ) %>:</th>
+    </tr>
+
+    <% @task.workers.each do |w| %>
+    <tr align="right">
+        <td><%=h w.name %></td>
+    </tr>
+    <% end %>
+  </table>
+
+</p>
+<br>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Destroy', @task, :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Tasks', tasks_path %> |
+<%= link_to 'Plans', plans_path %> |
+<%= link_to 'New', new_task_path %>

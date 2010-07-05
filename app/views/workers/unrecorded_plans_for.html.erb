@@ -1,0 +1,17 @@
+<p>
+  <h1><%=h @worker.name %></h1>
+  <% for p in @worker.plans.unrecorded.all %>
+    <table>
+    <tr><td><%=h  p.human_date %></td></tr>
+    <% cl = p.chore_lists.find_all_by_worker_id( @worker ).first %>
+    <% for a in cl.assignments %>
+       <tr><td width="150px"></td><td width="400px"><%=h a.task.annotated_description %></td><td align="right"><%=h a.task.duration %></td></tr>
+    <% end %>
+    <b><tr><td></td><td align='right'>Total:</td><td align='right' width="30px"><%=h cl.duration %></td></tr>
+    </table>
+  <% end %>
+</p>
+
+'*' Indicates task cannot be done ahead of time
+
+<%= link_to 'Back', workers_path %>

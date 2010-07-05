@@ -1,0 +1,22 @@
+<% form_for(@plan, :url=>{ :action => "make_weekly" } ) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <b>
+    Time to spend doing chores each day:  
+    </b>
+    <%= f.text_field :duration, :style=>'width: 50px' %><br>
+  </p>
+  <p>
+    Begin Date:
+    <%= f.date_select :new_plan_begin_date %>
+  </p>
+  <p>
+    End Date:
+    <%= f.date_select :new_plan_end_date %> 
+  </p>
+
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

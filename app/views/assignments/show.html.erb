@@ -1,0 +1,18 @@
+<p>
+  <b>Chore list:</b>
+  <%=h @assignment.chore_list %>
+</p>
+
+<p>
+  <b>Task:</b>
+  <%=h @assignment.task %>
+</p>
+
+<p>
+  <b>Complete:</b>
+  <%=h @assignment.complete %>
+</p>
+
+
+<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
+<%= link_to 'Back', assignments_path %>

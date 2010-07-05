@@ -1,0 +1,21 @@
+<h1>Chore Planner</h1>
+<%= link_to "Plans", plans_path %>
+<br>
+<br>
+<b><u>
+To Do:<br>
+</b></u>
+<br>
+<list>
+<li> Create a config table to store the default like: minutes per plan, etc.
+<li> Access to default duration for plan when creating for a whole week
+<li> check the state of the completed flag in individual assignments when updating next_dates
+<li> When recording a plan, set the completed flag in each assignment
+<li> Add a force_date flag to task to force a task to show up on that chore_list.  If the force date is less than the 
+next date then it will be used when making assignments.  When an assignment is 'recorded' as completed, set the force_date equal to the next date.
+<li> add link_to on edit_task to set next date to 'Today', this will require modifying assignments in someway so that next_date is not re-evaluated
+<li> investigate printing whole week worth on a single page
+<li> investigate multiple column printing
+</list>
+<br>
+<p>Find me in app/views/home/index.html.erb</p>

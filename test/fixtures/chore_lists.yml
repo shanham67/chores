@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  plan: 
+  worker: 
+  duration: 1
+
+two:
+  plan: 
+  worker: 
+  duration: 1

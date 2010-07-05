@@ -1,0 +1,25 @@
+<h1>Listing chore_lists</h1>
+
+<table cellspacing = "5" >
+  <tr align = "left" >
+    <th>Plan</th>
+    <th>Worker</th>
+    <th>Duration</th>
+  </tr>
+
+<% for chore_list in @chore_lists %>
+  <tr>
+    <td><%=h chore_list.plan.date %></td>
+    <td><%=h chore_list.worker.name %></td>
+    <td><%=h chore_list.duration %></td>
+    <td><%= link_to 'Show', chore_list %></td>
+    <td><%= link_to 'Edit', edit_chore_list_path(chore_list) %></td>
+    <td><%= link_to 'Destroy', chore_list, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New chore_list', new_chore_list_path %>
+<%= link_to 'Plans', plans_path %>

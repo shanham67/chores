@@ -1,0 +1,14 @@
+<% form_for(@plan) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <b>
+    Time to spend doing chores for week:  
+    </b>
+    <%= f.text_field :duration, :style=>'width: 50px' %><br>
+  </p>
+
+  <p>
+    <%= link_to 'Create Plans for Week', make_weekly_plans_url( :duration => @plan.duration ) %> 
+  </p>
+<% end %>

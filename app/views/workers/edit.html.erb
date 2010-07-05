@@ -1,0 +1,19 @@
+<h1>Editing worker</h1>
+
+<% form_for(@worker) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+    <br>
+    <%= f.check_box :has_chores %>
+    <%= f.label :has_chores %><br>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @worker %> |
+<%= link_to 'Back', workers_path %>

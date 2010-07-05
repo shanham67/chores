@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  chore_list: 
+  task: 
+  complete: false
+
+two:
+  chore_list: 
+  task: 
+  complete: false

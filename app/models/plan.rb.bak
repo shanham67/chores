@@ -1,0 +1,122 @@
+class Plan < ActiveRecord::Base
+  has_and_belongs_to_many :workers
+  has_many :chore_lists, :dependent => :destroy
+
+  named_scope :recent, lambda { { :conditions => ['date > ?', 2.weeks.ago], :order => 'date' } }
+  named_scope :by_date, :order => 'date'
+  named_scope :recorded, :conditions => { :recorded => true }
+  named_scope :unrecorded, :conditions => { :recorded => false }
+
+  def plan_logger( txt )
+    logger.debug "Plan::" + txt
+  end
+
+  def self.default_duration
+     60    
+  end 
+  
+  def human_date
+    date.strftime("%A, %b %d")
+  end
+
+  def make_assignments
+
+    chore_lists.each do |cl|
+      plan_logger "recalcing duration for " + cl.id.to_s 
+      cl.recalc_duration
+      cl.save
+    end
+
+#    Task.update_next_dates
+
+plan_logger "Calling Task.past_due...\n"
+
+    tasks = Task.past_due( self.date ).by_priority.by_next_date
+
+    tasks.each do |t|
+
+      worker_found = false
+      plan_logger t.next_date.to_s + "-" + t.description 
+
+      t.workers.each do |w|
+
+# compare the workers for this task to the workers included in this plan
+        if workers.exists?(w)
+ 
+            plan_logger "Checking " + w.name 
+          if w.assignments.find_all_by_task_id(t).empty?
+            plan_logger t.description + " has never been assigned\n"
+            chore_lists.find_all_by_worker_id( w.id ).each do |cl|
+                  plan_logger "checking " + w.name + " from plan.chore_list\n"
+              if (cl.duration + t.duration) <= self.duration 
+                @assign_to = w
+                  plan_logger "Select " + w.name + " because never has been assigned " + t.description 
+                worker_found = true
+                break
+              end
+            end
+          end
+
+        else
+          plan_logger "*** " + w.name + " can do '" + t.description + "' but not included in plan\n" 
+        end
+
+        if worker_found 
+          break
+        end
+
+      end
+
+      unless worker_found
+
+# the first worker returned in this list will be the one who did this task longest ago
+        plan_logger "find_all_by_task_id(t) " + t.id.to_s
+
+#3/15/09        Assignment.find_all_by_task_id(t).sort_by(&:date_complete).each do |a|
+        t.assignments.sort_by(&:date_complete).each do |a|
+
+          plan_logger "Checking " + a.worker.name + " in order by date\n"
+          plan_logger "Count " +  chore_lists.find_all_by_worker_id(a.worker.id).length.to_s 
+
+          chore_lists.find_all_by_worker_id(a.worker.id).each do |cl|
+
+            plan_logger "here\n"
+            plan_logger "cl.duration " + cl.duration.to_s 
+            plan_logger t.duration.to_s
+            plan_logger self.duration.to_s
+
+            if (cl.duration + t.duration) <= self.duration
+              @assign_to = a.worker
+                  plan_logger "Select " + a.worker.name + " for " + t.description + " because it is their turn.\n"
+              worker_found = true
+              break
+            end
+          end
+          if worker_found 
+            break
+          end 
+        end 
+      end
+
+      if worker_found
+            plan_logger "WORKER(" + @assign_to.name + ") FOUND FOR: " + t.description 
+        chore_lists.find_all_by_worker_id(@assign_to.id).each do |cl|
+            plan_logger "Assigning " + t.description + " to " + @assign_to.name 
+            plan_logger "Task.duration " + t.duration.to_s 
+            plan_logger "BEFORE: " + cl.duration.to_s 
+          cl.add_assignment(t)
+            plan_logger "AFTER: " + cl.duration.to_s 
+          cl.save
+          t.set_dates( self.date )
+          t.save
+          break
+        end
+      else
+            plan_logger "NO WORKER FOUND FOR: " + t.description 
+      end
+
+    end
+
+  end #make_assignments
+
+end
