@@ -4,6 +4,9 @@
   <br>
   <b>Has Chores:</b>
   <%=h @worker.has_chores %>
+  <br>
+  <b>Pay Rate($/hr.):</b>
+  <%=h number_to_currency(@worker.pay_rate, :unit => "$") %>
 </p>
 
 
