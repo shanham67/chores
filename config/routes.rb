@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :pay_rate_changes
+
   map.resources :assignments, :has_one => [:task, :worker, :chore_list]
 #  map.resources :assignments
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708163841) do
+ActiveRecord::Schema.define(:version => 20100712203350) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "chore_list_id"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20100708163841) do
     t.integer  "plan_id"
     t.integer  "worker_id"
     t.integer  "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pay_rate_changes", :force => true do |t|
+    t.date     "effective_date"
+    t.decimal  "new_rate",       :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.integer  "worker_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
