@@ -1,0 +1,17 @@
+<table border="1">
+<tr>
+<td><b>Worker:</b> 
+<td><%= h @pay_rate_change.worker.name %>
+</tr>
+<tr>
+<td><b>Effective Date:</b> 
+<td><%= h @pay_rate_change.effective_date %>
+</tr>
+<tr>
+<td><b>New Rate:</b> 
+<td><%= h number_to_currency(@pay_rate_change.new_rate) %>
+<tr>
+</table>
+<br>
+<%= link_to 'Edit', edit_pay_rate_change_path(@pay_rate_change) %> |
+<%= link_to 'Back', pay_rate_changes_path %>

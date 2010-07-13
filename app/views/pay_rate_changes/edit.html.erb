@@ -1,0 +1,12 @@
+<h1>Editing pay_rate_change</h1>
+
+<% form_for(@pay_rate_change) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @pay_rate_change %> |
+<%= link_to 'Back', pay_rate_changes_path %>
