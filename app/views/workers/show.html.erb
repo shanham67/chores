@@ -9,6 +9,24 @@
   <%=h number_to_currency(@worker.pay_rate, :unit => "$") %>
 </p>
 
+<%if @worker.pay_rate_changes.count > 0 %>
+  <table border="1">
+    <tr>
+      <th>Eff.Date</th>
+      <th>New Rate</th>
+    </tr>
 
+    <% for pay_rate_change in @worker.pay_rate_changes.all %>
+      <tr>
+        <td><%=h pay_rate_change.effective_date %></td>
+        <td align="right"><%=h number_to_currency pay_rate_change.new_rate %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p><%=h @worker.name %> hasn't received any rate changes.</p>
+<% end %>
+
+<br>
 <%= link_to 'Edit', edit_worker_path(@worker) %> |
 <%= link_to 'Back', workers_path %>

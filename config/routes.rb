@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :pay_rate_changes
+#  map.resources :pay_rate_changes
 
   map.resources :assignments, :has_one => [:task, :worker, :chore_list]
 #  map.resources :assignments
@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :chore_lists
 
   map.resources :workers, :member => {:unrecorded_plans_for => :get }, :only => :get
-  map.resources :workers, :has_many => [:assignments, :tasks]
+  map.resources :workers, :has_many => [:assignments, :tasks, :pay_rate_changes]
 #  map.resources :workers
 
   # The priority is based upon order of creation: first created -> highest priority.

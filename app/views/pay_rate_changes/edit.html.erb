@@ -1,12 +1,6 @@
 <h1>Editing pay_rate_change</h1>
 
-<% form_for(@pay_rate_change) do |f| %>
-  <%= f.error_messages %>
+<%= render :partial => "edit_form", :locals => { :button_label => "Update" } %>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @pay_rate_change %> |
-<%= link_to 'Back', pay_rate_changes_path %>
+<%= link_to 'Show', [@worker,@pay_rate_change] %> |
+<%= link_to 'Back', worker_pay_rate_changes_path(@worker) %>

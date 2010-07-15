@@ -1,4 +1,6 @@
-<h1>Listing pay_rate_changes</h1>
+<h1>Pay Rate Changes for: <%=h @worker.name %></h1>
+
+<% if @worker.pay_rate_changes.count > 0 %>
 
 <table border="1">
   <tr>
@@ -12,13 +14,19 @@
     <td><%= pay_rate_change.worker.name %></td>
     <td><%= pay_rate_change.effective_date %></td>
     <td align="right"><%= number_to_currency pay_rate_change.new_rate %></td>
-    <td><%= link_to 'Show', pay_rate_change %></td>
-    <td><%= link_to 'Edit', edit_pay_rate_change_path(pay_rate_change) %></td>
-    <td><%= link_to 'Destroy', pay_rate_change, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', [@worker,pay_rate_change] %></td>
+    <td><%= link_to 'Edit', edit_worker_pay_rate_change_path(@worker,pay_rate_change) %></td>
+    <td><%= link_to 'Destroy', [@worker,pay_rate_change], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
+<% else %>
+ <p><%=h @worker.name %> hasn't received pay rate changes.</p>
+<% end %>
 
-<%= link_to 'New pay_rate_change', new_pay_rate_change_path %>
+<p>
+<%= link_to 'Raise', new_worker_pay_rate_change_path(@worker) %> |
+<%= link_to 'Show '+@worker.name, @worker %>
+</p>

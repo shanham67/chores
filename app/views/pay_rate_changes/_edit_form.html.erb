@@ -1,0 +1,13 @@
+<% form_for([@worker,@pay_rate_change]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :effective_date %>
+    <%= f.text_field :effective_date %><br>
+    <%= f.label :new_rate %>
+    <%= f.text_field :new_rate %><br>
+  </p>
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>
