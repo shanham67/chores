@@ -1,24 +1,24 @@
 <p>
-  <b>Name:</b>
-  <%=h @worker.name %>
-  <br>
-  <b>Has Chores:</b>
-  <%=h @worker.has_chores %>
-  <br>
-  <b>Pay Rate($/hr.):</b>
-  <%=h number_to_currency(@worker.pay_rate, :unit => "$") %>
+  <table border="1">
+	  <tr> <td><b>Name:</b></td>      <td><%=h @worker.name %></td> 				</tr>
+	  <tr> <td><b>Has Chores:</b></td><td><%=h @worker.has_chores %></td>				</tr>
+	  <tr> <td><b>Hrly Rate ($/hr):</b></td> <td><%=h number_to_currency @worker.hourly_rate %></td></tr>
+  </table>
 </p>
-
+<br>
+<b>Hourly Rate History:</b>
 <%if @worker.pay_rate_changes.count > 0 %>
   <table border="1">
     <tr>
       <th>Eff.Date</th>
+      <th>Old Rate</th>
       <th>New Rate</th>
     </tr>
 
     <% for pay_rate_change in @worker.pay_rate_changes.all %>
       <tr>
         <td><%=h pay_rate_change.effective_date %></td>
+        <td align="right"><%=h number_to_currency pay_rate_change.old_rate %></td>
         <td align="right"><%=h number_to_currency pay_rate_change.new_rate %></td>
       </tr>
     <% end %>

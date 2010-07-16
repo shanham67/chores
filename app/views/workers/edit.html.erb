@@ -3,20 +3,24 @@
 <% form_for(@worker) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %><br>
-    <br>
-    <%= f.check_box :has_chores %>
-    <%= f.label :has_chores %><br>
-  </p>
+  <table>
+	  <tr>
+		  <td align="right"><%= f.label :name %></td>
+		  <td><%= f.text_field :name, :size => 12 %></td>
+	  </tr>
+	  <tr>
+		  <td align="right"><%= f.label :hourly_rate %></td>
+		  <td><%= f.text_field :hourly_rate, :size => 5 %></td>
+	  </tr>
+	  <tr>
+		  <td><%= f.label :has_chores %></td>
+		  <td><%= f.check_box :has_chores %></td>
+	  </tr>
+  </table>
+			 
   <p>
     <%= f.submit "Update" %>
   </p>
 <% end %>
-
-<%= link_to 'Raise', new_worker_pay_rate_change_path(@worker) %>
-<br>
-<br>
 <%= link_to 'Show', @worker %> |
 <%= link_to 'Back', workers_path %>
