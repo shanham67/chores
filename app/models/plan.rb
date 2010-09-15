@@ -8,6 +8,7 @@ class Plan < ActiveRecord::Base
   named_scope :by_date, :order => 'date'
   named_scope :recorded, :conditions => { :recorded => true }
   named_scope :unrecorded, :conditions => { :recorded => false }
+  named_scope :future, lambda { { :conditions => ['date >= ?', Date.today], :order => 'date' } }
 
   def record
      chore_lists.each do |cl|

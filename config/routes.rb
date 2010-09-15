@@ -54,14 +54,15 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
   map.resources :plans, :collection => { :index_all => :get, :make_weekly => [:get, :post] }, :only => :get
-  map.resources :plans, :collection => { :input_time_for_week => [:get, :post], :unrecorded_ordered_by_day => :get, :unrecorded_ordered_by_worker => :get }, :only => [:get, :post]
+  map.resources :plans, :collection => { :input_time_for_week => [:get, :post], :unrecorded_ordered_by_day => :get, :unrecorded_ordered_by_worker => :get, :unrecorded_future => :get }, :only => [:get, :post]
 #  map.resources :plans, :member => { :input_time_for_week => [:get, :post] }
-  map.resources :plans, :member => { :printout => :get }, :only => :get
+  map.resources :plans, :member => { :printout => :get, :add_task_for_worker => :get }, :only => :get
   map.resources :plans, :new => { :record_all => :get }, :only => :get
   map.resources :plans, :member => { :do_record => :get }, :only => :get
   map.resources :plans
 #  map.connect ':controller/:action/:id'
 #  map.connect ':controller/:action/:id.:format'
+
 
 
   map.root :controller => "home"

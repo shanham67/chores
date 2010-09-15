@@ -127,6 +127,22 @@ print "Plan exists for ", d.to_s, "\n"
     end
   end
 
+  def add_task_for_worker
+    @plan = Plan.find(params[:id])
+    @worker = Worker.find(params[:worker])
+    @task = Task.find(params[:task])
+    cl = @plan.chore_lists.find_by_worker_id(@worker)
+    cl.add_assignment(@task)
+    cl.save
+    redirect_to(@plan)
+  end 
+
+  def unrecorded_future
+    @plans = Plan.unrecorded.future
+    @worker = Worker.find(params[:worker])
+    @task = Task.find(params[:task])
+  end
+
   def unrecorded_ordered_by_worker
     @plans = Plan.unrecorded.by_date
 

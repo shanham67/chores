@@ -1,0 +1,15 @@
+<h1>Add task to existing plan...</h1>
+
+<table>
+<tr><td align="left">Task:</td><td><%=h @task.description %></td></tr>
+<tr><td align="left">Worker:</td><td><%=h @worker.name %></td></tr>
+
+<tr><td>Select plan:</td></tr>
+<% for plan in @plans %>
+<tr><td></td><td>
+      <%= link_to plan.human_date, {:id => plan.id, :task => @task.id, :worker => @worker.id, :action => "add_task_for_worker"}, {:confirm => "Add '"+@task.description + "' to plan for " + plan.human_date} %></td>
+<tr>
+<% end %>
+</table>
+<br>
+<%= link_to 'Recent Plans', plans_path %>
